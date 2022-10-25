@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Main {
   public static void main(String[] args) throws Exception {
-    String sql = "select * from table1 where myDate >= TIMESTAMP ";
+    String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >= '2022-09-25'";
     prepare();
 
     Planner planner = PlannerPool.getPlanner();
