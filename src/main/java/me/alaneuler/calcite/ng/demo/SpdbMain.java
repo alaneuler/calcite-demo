@@ -14,15 +14,12 @@ import org.apache.calcite.util.Pair;
 
 import java.util.List;
 
-public class Main {
+public class SpdbMain {
   public static void main(String[] args) throws Exception {
-    // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >= '2022-09-25'";
     String sql = """
-        SELECT pt_user.id, name, age, sum(price)
-        FROM pt_user join pt_order ON pt_user.id = pt_order.user_id
-        WHERE age >= 20 AND age <= 30
-        GROUP BY pt_user.id, name, age
-        ORDER BY pt_user.id
+        select khzh, kmhao, sum(lsh) from pt_spdb
+        group by khzh, kmhao
+        order by sum(lsh)
         """;
     prepare();
 
@@ -39,29 +36,18 @@ public class Main {
   private static void prepare() {
     TableUtils.createTable(
         "",
-        "pt_user",
+        "pt_spdb",
         List.of(
-            Pair.of("id", SqlTypeName.INTEGER),
-            Pair.of("name", SqlTypeName.VARCHAR),
-            Pair.of("age", SqlTypeName.INTEGER)
-        )
-    );
-
-    TableUtils.createTable(
-        "",
-        "pt_order",
-        List.of(
-            Pair.of("id", SqlTypeName.INTEGER),
-            Pair.of("user_id", SqlTypeName.INTEGER),
-            Pair.of("goods", SqlTypeName.VARCHAR),
-            Pair.of("price", SqlTypeName.DECIMAL)
+            Pair.of("khzh", SqlTypeName.INTEGER),
+            Pair.of("kmhao", SqlTypeName.VARCHAR),
+            Pair.of("lsh", SqlTypeName.INTEGER)
         )
     );
   }
 
   private static RelOptPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
-    builder.addRuleInstance(CoreRules.FILTER_INTO_JOIN);
+    builder.addRuleInstance(CoreRules.AGGREGATE_REMOVE);
     return new HepPlanner(builder.build());
   }
 }
