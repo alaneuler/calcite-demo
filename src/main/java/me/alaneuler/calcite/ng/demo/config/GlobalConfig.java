@@ -23,6 +23,9 @@ public class GlobalConfig {
   @Getter
   private FrameworkConfig frameworkConfig;
 
+  @Getter
+  private CalcitePrepare.Context px;
+
   public static final GlobalConfig INSTANCE = new GlobalConfig();
 
   private GlobalConfig() {

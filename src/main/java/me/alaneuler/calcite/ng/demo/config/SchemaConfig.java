@@ -2,6 +2,7 @@ package me.alaneuler.calcite.ng.demo.config;
 
 import org.apache.calcite.schema.SchemaPlus;
 import org.apache.calcite.schema.Table;
+import org.apache.calcite.server.DdlExecutor;
 
 public class SchemaConfig {
   public static void addTable(String schemaName, String tableName, Table table) {
@@ -14,5 +15,9 @@ public class SchemaConfig {
       return rootSchema;
     }
     return rootSchema.getSubSchema(dbName);
+  }
+
+  public static DdlExecutor ddlExecutor() {
+    return GlobalConfig.INSTANCE.getFrameworkConfig().getParserConfig().parserFactory().getDdlExecutor();
   }
 }

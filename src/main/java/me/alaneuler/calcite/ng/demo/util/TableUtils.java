@@ -12,4 +12,6 @@ public class TableUtils {
     fields.forEach(field -> table.addField(field.getKey(), field.getValue()));
     SchemaConfig.addTable(schemaName, tableName, table);
   }
+
+  public static void
 }
