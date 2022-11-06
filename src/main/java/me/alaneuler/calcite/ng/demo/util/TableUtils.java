@@ -13,5 +13,7 @@ public class TableUtils {
     SchemaConfig.addTable(schemaName, tableName, table);
   }
 
-  public static void
+  public static void createTable(String sql) {
+    SchemaConfig.addTable(sql);
+  }
 }

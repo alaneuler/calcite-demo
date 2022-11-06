@@ -38,7 +38,7 @@ public class AggRemoveMain {
   }
 
   private static void prepare() {
-    SchemaConfig.ddlExecutor().executeDdl(GlobalConfig.INSTANCE.getPx(), );
+    SchemaConfig.addTable("CREATE TABLE pt_user (id int, name varchar(20), age int)");
 //    TableUtils.createTable(
 //        "",
 //        "pt_user",

@@ -26,14 +26,18 @@ public class GlobalConfig {
   @Getter
   private CalcitePrepare.Context px;
 
+  @Getter
+  private SqlParser.Config sqlParserConfig;
+
   public static final GlobalConfig INSTANCE = new GlobalConfig();
 
   private GlobalConfig() {
-    CalcitePrepare.Context prepareContext = prepareContext();
+    this.px = prepareContext();
+    this.sqlParserConfig = parserConfig();
 
     this.frameworkConfig = Frameworks.newConfigBuilder()
-        .parserConfig(parserConfig())
-        .defaultSchema(prepareContext.getMutableRootSchema().plus())
+        .parserConfig(this.sqlParserConfig)
+        .defaultSchema(this.px.getMutableRootSchema().plus())
         .operatorTable(operatorTable())
         .build();
   }
