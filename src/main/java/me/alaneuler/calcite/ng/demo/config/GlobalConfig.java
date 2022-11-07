@@ -56,6 +56,7 @@ public class GlobalConfig {
         .withConformance(SqlConformanceEnum.MYSQL_5)
         .withQuoting(Quoting.BACK_TICK)
         .withCaseSensitive(false)
+        .withParserFactory(new SimpleSqlParserImplFactory())
         .withUnquotedCasing(Casing.UNCHANGED);
   }
 

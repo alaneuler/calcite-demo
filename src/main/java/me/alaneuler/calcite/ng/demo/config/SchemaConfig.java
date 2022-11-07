@@ -12,8 +12,12 @@ public class SchemaConfig {
   }
 
   public static void addTable(String sql) {
+    executeDdl(sql);
+  }
+
+  private static void executeDdl(String ddl) {
     try {
-      SqlParser parser = SqlParser.create(sql, GlobalConfig.INSTANCE.getSqlParserConfig());
+      SqlParser parser = SqlParser.create(ddl, GlobalConfig.INSTANCE.getSqlParserConfig());
       SqlNode node = parser.parseStmt();
       ddlExecutor().executeDdl(GlobalConfig.INSTANCE.getPx(), node);
     } catch (Throwable e) {
