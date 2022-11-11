@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo;
 
 import me.alaneuler.calcite.ng.demo.config.PlannerPool;
+import me.alaneuler.calcite.ng.demo.util.RelNodeUtils;
 import me.alaneuler.calcite.ng.demo.util.TableUtils;
 import org.apache.calcite.plan.RelOptPlanner;
 import org.apache.calcite.plan.hep.HepPlanner;
@@ -30,10 +31,12 @@ public class Main {
     SqlNode sqlNode = planner.parse(sql);
     sqlNode = planner.validate(sqlNode);
     RelNode relNode = planner.rel(sqlNode).project();
+    System.out.println(RelNodeUtils.dump(relNode));
 
     RelOptPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();
+    System.out.println(RelNodeUtils.dump(relNode));
   }
 
   private static void prepare() {
