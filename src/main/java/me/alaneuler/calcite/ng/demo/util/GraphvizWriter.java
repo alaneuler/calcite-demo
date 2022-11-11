@@ -29,7 +29,7 @@ public class GraphvizWriter implements RelWriter {
 
   @Override
   public RelWriter input(String term, RelNode input) {
-    // Ignore all input, because we're outputting in a graph.
+    // Ignore all input, because we're outputting node in a graph.
     return this;
   }
 
