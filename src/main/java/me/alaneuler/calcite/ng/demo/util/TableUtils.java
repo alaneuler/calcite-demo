@@ -7,12 +7,18 @@ import org.apache.calcite.util.Pair;
 import java.util.List;
 
 public class TableUtils {
+  /**
+   * Create a table via fields definition.
+   */
   public static void createTable(String schemaName, String tableName, List<Pair<String, SqlTypeName>> fields) {
     SimpleTable table = new SimpleTable();
     fields.forEach(field -> table.addField(field.getKey(), field.getValue()));
     SchemaConfig.addTable(schemaName, tableName, table);
   }
 
+  /**
+   * @param sql DDL SQL string
+   */
   public static void createTable(String sql) {
     SchemaConfig.addTable(sql);
   }

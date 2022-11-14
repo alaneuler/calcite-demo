@@ -3,7 +3,11 @@ package me.alaneuler.calcite.ng.demo.util;
 import org.apache.calcite.rel.RelNode;
 
 public class RelNodeUtils {
-  public static String dump(RelNode root) {
+  public static void dump(RelNode root) {
+    System.out.println(dumpStr(root));
+  }
+
+  public static String dumpStr(RelNode root) {
     StringBuilder sb = new StringBuilder(String.format("digraph %s {\n", root.getClass().getSimpleName()));
     dump(root, sb);
     return sb.append("}").toString();

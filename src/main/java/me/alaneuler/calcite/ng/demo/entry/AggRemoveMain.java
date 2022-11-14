@@ -1,26 +1,28 @@
-package me.alaneuler.calcite.ng.demo;
+package me.alaneuler.calcite.ng.demo.entry;
 
 import me.alaneuler.calcite.ng.demo.config.PlannerPool;
+import me.alaneuler.calcite.ng.demo.config.SchemaConfig;
 import me.alaneuler.calcite.ng.demo.util.SqlUtils;
-import me.alaneuler.calcite.ng.demo.util.TableUtils;
+import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
 import org.apache.calcite.plan.RelOptPlanner;
 import org.apache.calcite.plan.hep.HepPlanner;
 import org.apache.calcite.plan.hep.HepProgramBuilder;
+import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.rules.CoreRules;
 import org.apache.calcite.sql.SqlNode;
-import org.apache.calcite.sql.type.SqlTypeName;
 import org.apache.calcite.tools.Planner;
-import org.apache.calcite.util.Pair;
 
-import java.util.List;
-
-public class InMain {
+public class AggRemoveMain {
   public static void main(String[] args) throws Exception {
-    // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >= '2022-09-25'";
     String sql = """
-        select * from pt_user
-        where id in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21)
+        SELECT name, sum(count_inner)
+        FROM
+          (SELECT name, COUNT(*) AS count_inner
+           FROM pt_lsb
+           GROUP BY name
+           ORDER BY count_inner LIMIT 100)
+        GROUP BY name
         """;
     prepare();
 
@@ -29,29 +31,21 @@ public class InMain {
     sqlNode = planner.validate(sqlNode);
     RelNode relNode = planner.rel(sqlNode).project();
 
-    RelOptPlanner hepPlanner = hepPlanner();
-    hepPlanner.setRoot(relNode);
-    relNode = hepPlanner.findBestExp();
+    VolcanoPlanner volcanoPlanner =(VolcanoPlanner) relNode.getCluster().getPlanner();
+    volcanoPlanner.setNoneConventionHasInfiniteCost(false);
+    volcanoPlanner.setRoot(relNode);
+    relNode = volcanoPlanner.findBestExp();
+    VolcanoUtils.dump(volcanoPlanner);
     System.out.println(SqlUtils.toSqlString(relNode));
   }
 
   private static void prepare() {
-    TableUtils.createTable(
-        "",
-        "pt_user",
-        List.of(
-            Pair.of("id", SqlTypeName.INTEGER),
-            Pair.of("name", SqlTypeName.VARCHAR),
-            Pair.of("age", SqlTypeName.INTEGER)
-        )
-    );
+    SchemaConfig.addTable("CREATE TABLE IF NOT EXISTS `pt_lsb` (name VARCHAR NOT NULL)");
   }
 
   private static RelOptPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
-    // builder.addGroupBegin();
-    builder.addRuleInstance(CoreRules.FILTER_INTO_JOIN);
-    // builder.addGroupEnd();
+    builder.addRuleInstance(CoreRules.AGGREGATE_REMOVE);
     return new HepPlanner(builder.build());
   }
 }
