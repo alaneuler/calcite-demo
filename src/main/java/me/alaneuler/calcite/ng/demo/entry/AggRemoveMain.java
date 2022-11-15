@@ -2,14 +2,11 @@ package me.alaneuler.calcite.ng.demo.entry;
 
 import me.alaneuler.calcite.ng.demo.config.PlannerPool;
 import me.alaneuler.calcite.ng.demo.config.SchemaConfig;
+import me.alaneuler.calcite.ng.demo.util.RelNodeUtils;
 import me.alaneuler.calcite.ng.demo.util.SqlUtils;
 import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
-import org.apache.calcite.plan.RelOptPlanner;
-import org.apache.calcite.plan.hep.HepPlanner;
-import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
-import org.apache.calcite.rel.rules.CoreRules;
 import org.apache.calcite.sql.SqlNode;
 import org.apache.calcite.tools.Planner;
 
@@ -31,7 +28,7 @@ public class AggRemoveMain {
     sqlNode = planner.validate(sqlNode);
     RelNode relNode = planner.rel(sqlNode).project();
 
-    VolcanoPlanner volcanoPlanner =(VolcanoPlanner) relNode.getCluster().getPlanner();
+    VolcanoPlanner volcanoPlanner = RelNodeUtils.extractVolcanoPlanner(relNode);
     volcanoPlanner.setNoneConventionHasInfiniteCost(false);
     volcanoPlanner.setRoot(relNode);
     relNode = volcanoPlanner.findBestExp();
@@ -41,11 +38,5 @@ public class AggRemoveMain {
 
   private static void prepare() {
     SchemaConfig.addTable("CREATE TABLE IF NOT EXISTS `pt_lsb` (name VARCHAR NOT NULL)");
-  }
-
-  private static RelOptPlanner hepPlanner() {
-    HepProgramBuilder builder = new HepProgramBuilder();
-    builder.addRuleInstance(CoreRules.AGGREGATE_REMOVE);
-    return new HepPlanner(builder.build());
   }
 }

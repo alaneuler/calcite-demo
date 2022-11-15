@@ -1,5 +1,6 @@
 package me.alaneuler.calcite.ng.demo.util;
 
+import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 
 public class RelNodeUtils {
@@ -11,6 +12,10 @@ public class RelNodeUtils {
     StringBuilder sb = new StringBuilder(String.format("digraph %s {\n", root.getClass().getSimpleName()));
     dump(root, sb);
     return sb.append("}").toString();
+  }
+
+  public static VolcanoPlanner extractVolcanoPlanner(RelNode relNode) {
+    return (VolcanoPlanner) relNode.getCluster().getPlanner();
   }
 
   private static void dump(RelNode node, StringBuilder sb) {
