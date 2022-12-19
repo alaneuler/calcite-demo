@@ -42,6 +42,9 @@ public class ExternalizationMain {
                 catalogReader,
                 GlobalConfig.INSTANCE.getPx().getRootSchema().plus());
         RelNode nNode = reader.read(jsonStr);
+        RelJsonWriter writer2 = new RelJsonWriter();
+        nNode.explain(writer2);
+        String jsonStr2 = writer2.asString();
 
         RelNodeUtils.dump(relNode);
         RelNodeUtils.dump(nNode);
