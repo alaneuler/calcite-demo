@@ -38,7 +38,7 @@ public class Main {
     RelNodeUtils.dump(relNode);
   }
 
-  private static void prepare() {
+  public static void prepare() {
     TableUtils.createTable(
         "",
         "pt_user",
