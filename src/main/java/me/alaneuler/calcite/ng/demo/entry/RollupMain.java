@@ -1,10 +1,8 @@
 package me.alaneuler.calcite.ng.demo.entry;
 
 import me.alaneuler.calcite.ng.demo.config.PlannerPool;
-import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.RelNodeUtils;
 import org.apache.calcite.plan.RelOptPlanner;
-import org.apache.calcite.plan.hep.HepMatchOrder;
 import org.apache.calcite.plan.hep.HepPlanner;
 import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.rel.RelNode;
@@ -12,17 +10,9 @@ import org.apache.calcite.rel.rules.CoreRules;
 import org.apache.calcite.sql.SqlNode;
 import org.apache.calcite.tools.Planner;
 
-public class Main extends CommonTableMain {
+public class RollupMain {
   public static void main(String[] args) throws Exception {
-    // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >= '2022-09-25'";
-//    String sql = "select * from pt_user";
-    String sql = """
-        SELECT pt_user.id, name, age, sum(price)
-        FROM pt_user join pt_order ON pt_user.id = pt_order.user_id
-        WHERE age >= 20 AND age <= 30
-        GROUP BY pt_user.id, name, age
-        ORDER BY pt_user.id
-        """;
+    String sql = "select id, name, sum(age) from pt_user group by cube(id, name)";
 
     Planner planner = PlannerPool.getPlanner();
     SqlNode sqlNode = planner.parse(sql);
@@ -37,7 +27,6 @@ public class Main extends CommonTableMain {
 
   private static RelOptPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
-    builder.addMatchOrder(HepMatchOrder.BOTTOM_UP);
     builder.addRuleInstance(CoreRules.FILTER_INTO_JOIN);
     return new HepPlanner(builder.build());
   }
