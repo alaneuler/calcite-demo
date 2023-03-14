@@ -7,12 +7,12 @@ import org.apache.calcite.sql.SqlExplainLevel;
 import org.apache.calcite.util.Pair;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GraphvizWriter implements RelWriter {
-  private final Map<String, Object> attrs = new HashMap<>();
+  private final Map<String, Object> attrs = new LinkedHashMap<>();
 
   @Getter
   private String result;
@@ -43,6 +43,7 @@ public class GraphvizWriter implements RelWriter {
   public RelWriter done(RelNode node) {
     StringBuilder sb = new StringBuilder();
     sb.append(node.getRelTypeName());
+    sb.append("-").append(node.getId());
     sb.append("\\n");
     sb.append('(');
     int j = 0;

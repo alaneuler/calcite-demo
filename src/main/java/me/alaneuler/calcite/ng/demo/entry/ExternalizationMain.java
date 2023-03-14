@@ -1,15 +1,12 @@
 package me.alaneuler.calcite.ng.demo.entry;
 
 import me.alaneuler.calcite.ng.demo.config.GlobalConfig;
-import me.alaneuler.calcite.ng.demo.config.PlannerPool;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
-import me.alaneuler.calcite.ng.demo.util.RelNodeUtils;
+import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.prepare.CalciteCatalogReader;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.externalize.RelJsonReader;
 import org.apache.calcite.rel.externalize.RelJsonWriter;
-import org.apache.calcite.sql.SqlNode;
-import org.apache.calcite.tools.Planner;
 
 public class ExternalizationMain extends CommonTableMain {
     public static void main(String[] args) throws Exception {
@@ -21,11 +18,7 @@ public class ExternalizationMain extends CommonTableMain {
         ORDER BY pt_user.id
         """;
 
-        Planner planner = PlannerPool.getPlanner();
-        SqlNode sqlNode = planner.parse(sql);
-        sqlNode = planner.validate(sqlNode);
-        RelNode relNode = planner.rel(sqlNode).project();
-
+        RelNode relNode = RelUtils.toRel(sql);
         RelJsonWriter writer = new RelJsonWriter();
         relNode.explain(writer);
         String jsonStr = writer.asString();
@@ -44,7 +37,7 @@ public class ExternalizationMain extends CommonTableMain {
         nNode.explain(writer2);
         String jsonStr2 = writer2.asString();
 
-        RelNodeUtils.dump(relNode);
-        RelNodeUtils.dump(nNode);
+        RelUtils.dump(relNode);
+        RelUtils.dump(nNode);
     }
 }
