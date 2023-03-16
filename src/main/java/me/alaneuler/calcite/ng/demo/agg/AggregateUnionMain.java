@@ -23,7 +23,7 @@ public class AggregateUnionMain extends CommonTableMain {
         GROUP BY user_id, goods
         """;
 
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
 
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);

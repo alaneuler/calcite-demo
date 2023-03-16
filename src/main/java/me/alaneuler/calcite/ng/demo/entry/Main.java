@@ -21,7 +21,7 @@ public class Main extends CommonTableMain {
         ORDER BY pt_user.id
         """;
 
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
     RelOptPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();

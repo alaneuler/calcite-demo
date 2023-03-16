@@ -20,9 +20,9 @@ public class AggRemoveMain {
         """;
     prepare();
 
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
 
-    VolcanoPlanner volcanoPlanner = RelUtils.extractVolcanoPlanner(relNode);
+    VolcanoPlanner volcanoPlanner = VolcanoUtils.extractVolcanoPlanner(relNode);
     volcanoPlanner.setNoneConventionHasInfiniteCost(false);
     volcanoPlanner.setRoot(relNode);
     relNode = volcanoPlanner.findBestExp();

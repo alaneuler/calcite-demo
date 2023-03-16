@@ -18,7 +18,7 @@ public class ExternalizationMain extends CommonTableMain {
         ORDER BY pt_user.id
         """;
 
-        RelNode relNode = RelUtils.toRel(sql);
+        RelNode relNode = RelUtils.sqlToRel(sql);
         RelJsonWriter writer = new RelJsonWriter();
         relNode.explain(writer);
         String jsonStr = writer.asString();

@@ -19,7 +19,7 @@ public class ExternalizationMain2 extends CommonTableMain {
         select name from pt_user where name = 'alaneuler'
         """.trim();
 
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
     relNode = rboOptimization(relNode);
 
     RelJsonWriter writer = new RelJsonWriter();

@@ -10,7 +10,7 @@ public class CommonTableMain {
     createCommonTable();
   }
 
-  public static void createCommonTable() {
+  private static void createCommonTable() {
     TableUtils.createTable(
         "",
         "pt_user",

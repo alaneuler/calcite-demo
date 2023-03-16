@@ -12,7 +12,7 @@ public class RollupMain extends CommonTableMain {
   public static void main(String[] args) throws Exception {
     String sql = "select id, name, sum(age) from pt_user group by cube(id, name)";
 
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
 
     RelOptPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);

@@ -12,7 +12,7 @@ public class AggregateReduceMain extends CommonTableMain {
     String sql = """
         SELECT name, stddev(age), avg(age) from pt_user group by name
         """;
-    RelNode relNode = RelUtils.toRel(sql);
+    RelNode relNode = RelUtils.sqlToRel(sql);
 
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
