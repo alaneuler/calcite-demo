@@ -16,10 +16,10 @@ public class RelUtils {
   }
 
   public static void dump(RelNode root) {
-    System.out.println(toString(root));
+    System.out.println(toGraphvizString(root));
   }
 
-  public static String toString(RelNode root) {
+  public static String toGraphvizString(RelNode root) {
     StringBuilder sb = new StringBuilder(String.format("digraph %s {\n  \"rankdir\"=\"BT\";\n", root.getClass().getSimpleName()));
     dump(root, sb);
     return sb.append("}").toString();
