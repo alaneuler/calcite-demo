@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.apache.calcite.avatica.util.Casing;
 import org.apache.calcite.avatica.util.Quoting;
 import org.apache.calcite.jdbc.CalcitePrepare;
+import org.apache.calcite.plan.RelTraitDef;
 import org.apache.calcite.server.CalciteServerStatement;
 import org.apache.calcite.sql.SqlOperatorTable;
 import org.apache.calcite.sql.fun.SqlLibrary;
@@ -14,9 +15,11 @@ import org.apache.calcite.sql.util.SqlOperatorTables;
 import org.apache.calcite.sql.validate.SqlConformanceEnum;
 import org.apache.calcite.tools.FrameworkConfig;
 import org.apache.calcite.tools.Frameworks;
+import org.apache.calcite.tools.Programs;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,7 +43,7 @@ public class GlobalConfig {
         .parserConfig(this.sqlParserConfig)
         .defaultSchema(this.px.getMutableRootSchema().plus())
         .operatorTable(operatorTable())
-        .context(new ConfigContext(Map.of()))
+        .programs(Programs.heuristicJoinOrder(Programs.RULE_SET, true, 2))
         .build();
   }
 

@@ -7,6 +7,7 @@ import org.apache.calcite.plan.RelOptRules;
 import org.apache.calcite.plan.hep.HepPlanner;
 import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.rel.RelNode;
+import org.apache.calcite.rel.rules.materialize.MaterializedViewRules;
 
 public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
   public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
 
   private static HepPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
-    RelOptRules.MATERIALIZATION_RULES.forEach(builder::addRuleInstance);
+    builder.addRuleInstance(MaterializedViewRules.AGGREGATE);
     return new HepPlanner(builder.build());
   }
 }
