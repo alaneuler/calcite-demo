@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.entry;
+package me.alaneuler.calcite.ng.demo.agg;
 
 import me.alaneuler.calcite.ng.demo.config.SchemaConfig;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;

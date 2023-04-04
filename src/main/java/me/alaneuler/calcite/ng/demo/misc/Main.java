@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.entry;
+package me.alaneuler.calcite.ng.demo.misc;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;

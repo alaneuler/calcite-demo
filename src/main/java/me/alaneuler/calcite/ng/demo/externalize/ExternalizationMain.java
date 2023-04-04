@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.entry;
+package me.alaneuler.calcite.ng.demo.externalize;
 
 import me.alaneuler.calcite.ng.demo.config.GlobalConfig;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
