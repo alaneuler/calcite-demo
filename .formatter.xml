@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<profiles version="11">
+  <!-- Many more settings can be found here: https://help.eclipse.org/latest/index.jsp?topic=/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/formatter/DefaultCodeFormatterConstants.html -->
+  <profile kind="CodeFormatterProfile" version="11">
+    <setting id="org.eclipse.jdt.core.formatter.indentation.size" value="2"/>
+    <setting id="org.eclipse.jdt.core.formatter.tabulation.char" value="space"/>
+    <setting id="org.eclipse.jdt.core.formatter.tabulation.size" value="2"/>
+    <setting id="org.eclipse.jdt.core.formatter.lineSplit" value="80"/>
+  </profile>
+</profiles>

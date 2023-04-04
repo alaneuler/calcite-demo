@@ -27,7 +27,8 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
 
     RelNode relNode = RelUtils.sqlToRel(sql);
     RelUtils.dump(relNode);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster());
+    RelOptMaterialization materialization = MaterializeUtils
+        .createMaterialization(mvTableName, mvSql, relNode.getCluster());
     HepPlanner planner = hepPlanner();
     RelOptRules.MATERIALIZATION_RULES.forEach(planner::addRule);
     planner.addMaterialization(materialization);

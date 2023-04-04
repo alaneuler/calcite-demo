@@ -11,7 +11,8 @@ import org.apache.calcite.rel.rules.CoreRules;
 
 public class Main extends CommonTableMain {
   public static void main(String[] args) throws Exception {
-    // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >= '2022-09-25'";
+    // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >=
+    // '2022-09-25'";
     // String sql = "select * from pt_user";
     String sql = """
         SELECT pt_user.id, name, age, sum(price)

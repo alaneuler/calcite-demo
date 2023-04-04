@@ -32,8 +32,7 @@ public class ExternalizationMain2 extends CommonTableMain {
         GlobalConfig.INSTANCE.getPx().getTypeFactory(),
         GlobalConfig.INSTANCE.getPx().config());
     RelJsonReader reader = new RelJsonReader(relNode.getCluster(),
-        catalogReader,
-        GlobalConfig.INSTANCE.getPx().getRootSchema().plus());
+        catalogReader, GlobalConfig.INSTANCE.getPx().getRootSchema().plus());
     RelNode relNode1 = reader.read(json);
   }
 
@@ -42,33 +41,38 @@ public class ExternalizationMain2 extends CommonTableMain {
 
     // These rules are used to pull union to the top of logicalPlan.
     preBuilder.addGroupBegin();
-    preBuilder.addRuleCollection(
-        Arrays.stream(OptimizationRelatedRules.PRE_MV_REWRITING_RULES_FOR_UNION_PULL_TO_TOP)
-            .toList());
+    preBuilder.addRuleCollection(Arrays.stream(
+        OptimizationRelatedRules.PRE_MV_REWRITING_RULES_FOR_UNION_PULL_TO_TOP)
+        .toList());
     preBuilder.addGroupEnd();
 
     // These rules are used to make mv related rules can match more relNode.
     preBuilder.addGroupBegin();
-    preBuilder.addRuleCollection(
-        Arrays.stream(OptimizationRelatedRules.MV_REWRITING_RULES_FOR_MATCH_MORE_OPERAND).toList());
+    preBuilder.addRuleCollection(Arrays
+        .stream(
+            OptimizationRelatedRules.MV_REWRITING_RULES_FOR_MATCH_MORE_OPERAND)
+        .toList());
     preBuilder.addGroupEnd();
 
     preBuilder.addGroupBegin();
-    preBuilder.addRuleCollection(
-        Arrays.stream(OptimizationRelatedRules.POST_MV_REWRITING_RULES_FOR_UNION_PULL_TO_TOP)
-            .toList());
+    preBuilder.addRuleCollection(Arrays.stream(
+        OptimizationRelatedRules.POST_MV_REWRITING_RULES_FOR_UNION_PULL_TO_TOP)
+        .toList());
     preBuilder.addGroupEnd();
 
     preBuilder.addGroupBegin();
-    preBuilder.addRuleCollection(
-        Arrays.stream(OptimizationRelatedRules.POST_MV_REWRITE_RULES_FOR_PUSH_PROJECT).toList());
+    preBuilder.addRuleCollection(Arrays
+        .stream(OptimizationRelatedRules.POST_MV_REWRITE_RULES_FOR_PUSH_PROJECT)
+        .toList());
     preBuilder.addGroupEnd();
 
-    // These rules are used to convert logicalRelNode to CalcNode to make sql more easy.
+    // These rules are used to convert logicalRelNode to CalcNode to make sql
+    // more
+    // easy.
     preBuilder.addGroupBegin();
-    preBuilder.addRuleCollection(
-        Arrays.stream(OptimizationRelatedRules.POST_MV_REWRITE_RULES_FOR_PLAN_MORE_SIMPLER)
-            .toList());
+    preBuilder.addRuleCollection(Arrays.stream(
+        OptimizationRelatedRules.POST_MV_REWRITE_RULES_FOR_PLAN_MORE_SIMPLER)
+        .toList());
     preBuilder.addGroupEnd();
 
     HepPlanner preHepPlanner = new HepPlanner(preBuilder.build());

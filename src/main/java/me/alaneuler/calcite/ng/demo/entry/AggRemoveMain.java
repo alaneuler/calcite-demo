@@ -31,6 +31,7 @@ public class AggRemoveMain {
   }
 
   private static void prepare() {
-    SchemaConfig.addTable("CREATE TABLE IF NOT EXISTS `pt_lsb` (name VARCHAR NOT NULL)");
+    SchemaConfig.addTable(
+        "CREATE TABLE IF NOT EXISTS `pt_lsb` (name VARCHAR NOT NULL)");
   }
 }

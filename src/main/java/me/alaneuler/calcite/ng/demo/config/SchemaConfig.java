@@ -7,7 +7,8 @@ import org.apache.calcite.sql.SqlNode;
 import org.apache.calcite.sql.parser.SqlParser;
 
 public class SchemaConfig {
-  public static void addTable(String schemaName, String tableName, Table table) {
+  public static void addTable(String schemaName, String tableName,
+      Table table) {
     getSchema(schemaName).add(tableName, table);
   }
 
@@ -17,7 +18,8 @@ public class SchemaConfig {
 
   private static void executeDdl(String ddl) {
     try {
-      SqlParser parser = SqlParser.create(ddl, GlobalConfig.INSTANCE.getSqlParserConfig());
+      SqlParser parser = SqlParser.create(ddl,
+          GlobalConfig.INSTANCE.getSqlParserConfig());
       SqlNode node = parser.parseStmt();
       ddlExecutor().executeDdl(GlobalConfig.INSTANCE.getPx(), node);
     } catch (Throwable e) {
@@ -26,7 +28,8 @@ public class SchemaConfig {
   }
 
   private static SchemaPlus getSchema(String dbName) {
-    SchemaPlus rootSchema = GlobalConfig.INSTANCE.getFrameworkConfig().getDefaultSchema();
+    SchemaPlus rootSchema = GlobalConfig.INSTANCE.getFrameworkConfig()
+        .getDefaultSchema();
     if (rootSchema.getName().equals(dbName)) {
       return rootSchema;
     }
@@ -34,6 +37,7 @@ public class SchemaConfig {
   }
 
   public static DdlExecutor ddlExecutor() {
-    return GlobalConfig.INSTANCE.getFrameworkConfig().getParserConfig().parserFactory().getDdlExecutor();
+    return GlobalConfig.INSTANCE.getFrameworkConfig().getParserConfig()
+        .parserFactory().getDdlExecutor();
   }
 }

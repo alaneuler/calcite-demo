@@ -7,11 +7,12 @@ import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.logical.LogicalTableScan;
 
 public class MaterializeUtils {
-  public static RelOptMaterialization createMaterialization(String mvTableName, String mvSql, RelOptCluster cluster) {
+  public static RelOptMaterialization createMaterialization(String mvTableName,
+      String mvSql, RelOptCluster cluster) {
     LogicalTableScan tableScan = RelUtils.createTableScan(mvTableName);
     RelUtils.setCluster(tableScan, cluster);
     RelNode mvRel = RelUtils.sqlToRel(mvSql);
-    return new RelOptMaterialization(tableScan,
-        mvRel, null, Lists.newArrayList(mvTableName.split("\\.")));
+    return new RelOptMaterialization(tableScan, mvRel, null,
+        Lists.newArrayList(mvTableName.split("\\.")));
   }
 }

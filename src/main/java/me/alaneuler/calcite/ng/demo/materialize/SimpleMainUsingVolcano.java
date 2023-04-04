@@ -26,7 +26,8 @@ public class SimpleMainUsingVolcano extends MaterializeBaseMain {
 
     RelNode relNode = RelUtils.sqlToRel(sql);
     RelUtils.dump(relNode);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster());
+    RelOptMaterialization materialization = MaterializeUtils
+        .createMaterialization(mvTableName, mvSql, relNode.getCluster());
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(relNode);
     planner.setNoneConventionHasInfiniteCost(false);
     RelOptRules.MATERIALIZATION_RULES.forEach(planner::addRule);

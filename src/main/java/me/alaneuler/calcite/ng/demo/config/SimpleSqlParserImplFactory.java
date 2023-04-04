@@ -14,8 +14,7 @@ public class SimpleSqlParserImplFactory implements SqlParserImplFactory {
   public SqlAbstractParserImpl getParser(Reader reader) {
     final SqlDdlParserImpl parser = new SqlDdlParserImpl(reader);
     if (reader instanceof SourceStringReader) {
-      final String sql =
-          ((SourceStringReader) reader).getSourceString();
+      final String sql = ((SourceStringReader) reader).getSourceString();
       parser.setOriginalSql(sql);
     }
     return parser;

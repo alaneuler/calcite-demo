@@ -18,7 +18,8 @@ public class GraphvizWriter implements RelWriter {
   private String result;
 
   @Override
-  public void explain(RelNode rel, List<Pair<String, @Nullable Object>> valueList) {
+  public void explain(RelNode rel,
+      List<Pair<String, @Nullable Object>> valueList) {
     throw new UnsupportedOperationException();
   }
 
@@ -47,7 +48,7 @@ public class GraphvizWriter implements RelWriter {
     sb.append("\\n");
     sb.append('(');
     int j = 0;
-    for (Map.Entry<String, Object> entry: attrs.entrySet()) {
+    for (Map.Entry<String, Object> entry : attrs.entrySet()) {
       if (j++ > 0) {
         sb.append(",");
       }

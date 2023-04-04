@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GroupCollectionMain extends CommonTableMain {
   public static void main(String[] args) throws Exception {
-    String sql = """ 
+    String sql = """
         select * from pt_user
         """;
 
@@ -30,12 +30,9 @@ public class GroupCollectionMain extends CommonTableMain {
     builder.addGroupBegin();
     builder.addRuleInstance(CoreRules.FILTER_INTO_JOIN);
     builder.addRuleInstance(CoreRules.AGGREGATE_MERGE);
-    builder.addRuleCollection(
-        List.of(
-            CoreRules.AGGREGATE_UNION_TRANSPOSE,
-            CoreRules.JOIN_LEFT_UNION_TRANSPOSE,
-            CoreRules.JOIN_RIGHT_UNION_TRANSPOSE
-        ));
+    builder.addRuleCollection(List.of(CoreRules.AGGREGATE_UNION_TRANSPOSE,
+        CoreRules.JOIN_LEFT_UNION_TRANSPOSE,
+        CoreRules.JOIN_RIGHT_UNION_TRANSPOSE));
     builder.addGroupEnd();
     return new HepPlanner(builder.build());
   }

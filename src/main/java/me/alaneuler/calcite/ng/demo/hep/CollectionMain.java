@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CollectionMain extends CommonTableMain {
   public static void main(String[] args) throws Exception {
-    String sql = """ 
+    String sql = """
         select * from pt_user
         """;
 
@@ -26,10 +26,7 @@ public class CollectionMain extends CommonTableMain {
   private static RelOptPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
     builder.addRuleCollection(
-        List.of(
-            CoreRules.FILTER_INTO_JOIN,
-            CoreRules.AGGREGATE_MERGE
-        ));
+        List.of(CoreRules.FILTER_INTO_JOIN, CoreRules.AGGREGATE_MERGE));
     return new HepPlanner(builder.build());
   }
 }

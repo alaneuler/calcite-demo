@@ -24,7 +24,8 @@ public class Main extends MaterializeBaseMain {
         GROUP BY col1, dt
         """;
 
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName, mvSql, null);
+    RelOptMaterialization materialization = MaterializeUtils
+        .createMaterialization(mvTableName, mvSql, null);
     RelNode relNode = RelUtils.sqlToRel(sql);
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);

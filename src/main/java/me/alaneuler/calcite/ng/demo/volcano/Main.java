@@ -2,7 +2,6 @@ package me.alaneuler.calcite.ng.demo.volcano;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
-import me.alaneuler.calcite.ng.demo.util.TableUtils;
 import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
 import org.apache.calcite.adapter.enumerable.EnumerableConvention;
 import org.apache.calcite.adapter.enumerable.EnumerableRules;
@@ -22,16 +21,19 @@ public class Main extends CommonTableMain {
 
     RelNode rel = RelUtils.sqlToRel(sql);
     System.out.println("Explain after creating:");
-    System.out.println(RelOptUtil.toString(rel, SqlExplainLevel.ALL_ATTRIBUTES));
+    System.out
+        .println(RelOptUtil.toString(rel, SqlExplainLevel.ALL_ATTRIBUTES));
 
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     addEnumerableRules(planner);
     RelOptCluster cluster = rel.getCluster();
 
-    RelTraitSet traits = cluster.traitSet().replace(EnumerableConvention.INSTANCE);
+    RelTraitSet traits = cluster.traitSet()
+        .replace(EnumerableConvention.INSTANCE);
     rel = planner.changeTraits(rel, traits);
     System.out.println("Explain after changing traits:");
-    System.out.println(RelOptUtil.toString(rel, SqlExplainLevel.ALL_ATTRIBUTES));
+    System.out
+        .println(RelOptUtil.toString(rel, SqlExplainLevel.ALL_ATTRIBUTES));
 
     planner.setRoot(rel);
     VolcanoUtils.dump(planner);
@@ -39,7 +41,6 @@ public class Main extends CommonTableMain {
     RelNode best = planner.findBestExp();
     VolcanoUtils.dump(planner);
 
-    
   }
 
   private static void addEnumerableRules(RelOptPlanner planner) {

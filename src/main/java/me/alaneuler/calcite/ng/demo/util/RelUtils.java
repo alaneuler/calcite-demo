@@ -20,18 +20,17 @@ public class RelUtils {
   }
 
   public static String toGraphvizString(RelNode root) {
-    StringBuilder sb = new StringBuilder(String.format("digraph %s {\n  \"rankdir\"=\"BT\";\n", root.getClass().getSimpleName()));
+    StringBuilder sb = new StringBuilder(
+        String.format("digraph %s {\n  \"rankdir\"=\"BT\";\n",
+            root.getClass().getSimpleName()));
     dump(root, sb);
     return sb.append("}").toString();
   }
 
   private static void dump(RelNode node, StringBuilder sb) {
-    for (RelNode child: node.getInputs()) {
-      sb.append("  \"")
-          .append(graphDigest(child))
-          .append("\" -> \"")
-          .append(graphDigest(node))
-          .append("\";\n");
+    for (RelNode child : node.getInputs()) {
+      sb.append("  \"").append(graphDigest(child)).append("\" -> \"")
+          .append(graphDigest(node)).append("\";\n");
       dump(child, sb);
     }
   }
