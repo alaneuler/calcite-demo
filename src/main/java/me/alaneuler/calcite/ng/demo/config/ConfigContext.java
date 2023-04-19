@@ -10,9 +10,9 @@ import java.util.Properties;
 public class ConfigContext implements Context {
   private CalciteConnectionConfig calciteConnectionConfig;
 
-  public ConfigContext(Map<String, String> config) {
+  public ConfigContext(Map<String, String> configs) {
     Properties properties = new Properties();
-    properties.putAll(config);
+    properties.putAll(configs);
     this.calciteConnectionConfig = new CalciteConnectionConfigImpl(properties);
   }
 

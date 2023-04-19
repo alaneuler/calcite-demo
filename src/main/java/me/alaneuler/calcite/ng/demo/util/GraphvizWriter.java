@@ -11,14 +11,15 @@ import org.apache.calcite.util.Pair;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link RelWriter} for generating Graphviz dot file. This writer ignores {@link RelNode}'s
- * inputs for better displaying.
+ * A {@link RelWriter} for generating Graphviz dot file. This writer ignores
+ * {@link RelNode}'s inputs for better displaying.
  */
 public class GraphvizWriter implements RelWriter {
   /** Use LinkedHashMap here to have items ordered. */
   private final Map<String, Object> attrs = new LinkedHashMap<>();
 
-  @Getter private String result;
+  @Getter
+  private String result;
 
   private boolean displayType;
 
@@ -30,7 +31,8 @@ public class GraphvizWriter implements RelWriter {
   }
 
   @Override
-  public void explain(RelNode rel, List<Pair<String, @Nullable Object>> valueList) {
+  public void explain(RelNode rel,
+      List<Pair<String, @Nullable Object>> valueList) {
     throw new UnsupportedOperationException();
   }
 
@@ -66,7 +68,8 @@ public class GraphvizWriter implements RelWriter {
       if (j++ > 0) {
         sb.append(",");
       }
-      // For better graph visualization display: start a new line if current line exceed 20
+      // For better graph visualization display: start a new line if current
+      // line exceed 20
       // characters.
       if (lineCharCount > 20) {
         lineCharCount = 0;
@@ -76,7 +79,8 @@ public class GraphvizWriter implements RelWriter {
       sb.append(entry.getKey());
       sb.append('=');
       sb.append(entry.getValue());
-      lineCharCount += entry.getKey().length() + entry.getValue().toString().length();
+      lineCharCount += entry.getKey().length()
+          + entry.getValue().toString().length();
     }
     sb.append(')');
 

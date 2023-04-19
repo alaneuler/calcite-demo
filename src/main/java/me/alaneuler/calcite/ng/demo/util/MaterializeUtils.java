@@ -15,6 +15,7 @@ public class MaterializeUtils {
   public static RelOptMaterialization createMaterialization(String mvTableName,
       String mvSql, RelOptCluster cluster, boolean createMvTable) {
     RelNode mvRel = RelUtils.sqlToRel(mvSql);
+    RelUtils.setCluster(mvRel, cluster);
     if (createMvTable) {
       createTableForMvRel(mvRel, mvTableName);
     }

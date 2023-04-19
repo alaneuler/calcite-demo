@@ -39,8 +39,8 @@ public class GlobalConfig {
     this.frameworkConfig = Frameworks.newConfigBuilder()
         .parserConfig(this.sqlParserConfig)
         .defaultSchema(this.px.getMutableRootSchema().plus())
-        .context(new ConfigContext(Map.of()))
-        .operatorTable(operatorTable()).build();
+        .context(new ConfigContext(Map.of())).operatorTable(operatorTable())
+        .build();
   }
 
   /**
@@ -63,7 +63,7 @@ public class GlobalConfig {
         .withUnquotedCasing(Casing.UNCHANGED);
   }
 
-  private SqlOperatorTable operatorTable() {
+  public static SqlOperatorTable operatorTable() {
     return SqlOperatorTables.chain(SqlStdOperatorTable.instance(),
         SqlLibraryOperatorTableFactory.INSTANCE.getOperatorTable(Set
             .of(SqlLibrary.MYSQL, SqlLibrary.POSTGRESQL, SqlLibrary.ORACLE)));
