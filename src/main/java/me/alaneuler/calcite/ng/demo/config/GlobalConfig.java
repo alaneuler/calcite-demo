@@ -17,6 +17,7 @@ import org.apache.calcite.tools.Frameworks;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Map;
 import java.util.Set;
 
 public class GlobalConfig {
@@ -38,6 +39,7 @@ public class GlobalConfig {
     this.frameworkConfig = Frameworks.newConfigBuilder()
         .parserConfig(this.sqlParserConfig)
         .defaultSchema(this.px.getMutableRootSchema().plus())
+        .context(new ConfigContext(Map.of()))
         .operatorTable(operatorTable()).build();
   }
 
