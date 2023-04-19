@@ -25,6 +25,7 @@ public class Main extends CommonTableMain {
         .println(RelOptUtil.toString(rel, SqlExplainLevel.ALL_ATTRIBUTES));
 
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
+    planner.setTopDownOpt(true);
     addEnumerableRules(planner);
     RelOptCluster cluster = rel.getCluster();
 
@@ -40,7 +41,6 @@ public class Main extends CommonTableMain {
 
     RelNode best = planner.findBestExp();
     VolcanoUtils.dump(planner);
-
   }
 
   private static void addEnumerableRules(RelOptPlanner planner) {

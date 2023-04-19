@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize;
+package me.alaneuler.calcite.ng.demo.materialize.simple;
 
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
@@ -24,9 +24,9 @@ public class Main extends MaterializeBaseMain {
         GROUP BY col1, dt
         """;
 
-    RelOptMaterialization materialization = MaterializeUtils
-        .createMaterialization(mvTableName, mvSql, null);
     RelNode relNode = RelUtils.sqlToRel(sql);
+    RelOptMaterialization materialization = MaterializeUtils
+        .createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();

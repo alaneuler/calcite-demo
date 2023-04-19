@@ -36,7 +36,7 @@ public class RelUtils {
   }
 
   private static String graphDigest(RelNode relNode) {
-    GraphvizWriter writer = new GraphvizWriter();
+    GraphvizWriter writer = new GraphvizWriter(true, false);
     relNode.explain(writer);
     return writer.getResult();
   }

@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize;
+package me.alaneuler.calcite.ng.demo.materialize.simple;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.TableUtils;

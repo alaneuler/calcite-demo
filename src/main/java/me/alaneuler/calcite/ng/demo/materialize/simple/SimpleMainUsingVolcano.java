@@ -1,15 +1,14 @@
-package me.alaneuler.calcite.ng.demo.materialize;
+package me.alaneuler.calcite.ng.demo.materialize.simple;
 
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
+import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
 import org.apache.calcite.plan.RelOptMaterialization;
 import org.apache.calcite.plan.RelOptRules;
-import org.apache.calcite.plan.hep.HepPlanner;
-import org.apache.calcite.plan.hep.HepProgramBuilder;
+import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
-import org.apache.calcite.rel.rules.materialize.MaterializedViewRules;
 
-public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
+public class SimpleMainUsingVolcano extends MaterializeBaseMain {
   public static void main(String[] args) {
     String sql = """
         SELECT col1, SUM(cnt) FROM (
@@ -28,19 +27,15 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
     RelNode relNode = RelUtils.sqlToRel(sql);
     RelUtils.dump(relNode);
     RelOptMaterialization materialization = MaterializeUtils
-        .createMaterialization(mvTableName, mvSql, relNode.getCluster());
-    HepPlanner planner = hepPlanner();
+        .createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
+    VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(relNode);
+    planner.setTopDownOpt(true);
+    planner.setNoneConventionHasInfiniteCost(false);
     RelOptRules.MATERIALIZATION_RULES.forEach(planner::addRule);
     planner.addMaterialization(materialization);
 
     planner.setRoot(relNode);
     RelNode after = planner.findBestExp();
     RelUtils.dump(after);
-  }
-
-  private static HepPlanner hepPlanner() {
-    HepProgramBuilder builder = new HepProgramBuilder();
-    builder.addRuleInstance(MaterializedViewRules.AGGREGATE);
-    return new HepPlanner(builder.build());
   }
 }
