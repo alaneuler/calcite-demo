@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.materialize.tpch;
 
 import me.alaneuler.calcite.ng.demo.util.FileUtils;
+import me.alaneuler.calcite.ng.demo.util.SqlUtils;
 
 import static me.alaneuler.calcite.ng.demo.materialize.tpch.TpchBaseMain.MvRewriteType.SPJG;
 import static me.alaneuler.calcite.ng.demo.materialize.tpch.TpchBaseMain.MvRewriteType.SUBSTITUTION;
@@ -69,6 +70,7 @@ public class TpchDenormalizedTable extends TpchBaseMain {
     if (success) {
       System.out.println("### After:");
       System.out.print(result.getAfter().explain());
+      System.out.println(SqlUtils.toSqlString(result.getAfter()));
     }
 
     System.out.println(
