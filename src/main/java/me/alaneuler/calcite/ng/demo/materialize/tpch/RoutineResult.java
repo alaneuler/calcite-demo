@@ -10,7 +10,5 @@ public class RoutineResult {
   private RelNode before;
   private RelNode after;
 
-  private RelNode mvRel;
-
   private TpchBaseMain.MvRewriteType type;
 }
