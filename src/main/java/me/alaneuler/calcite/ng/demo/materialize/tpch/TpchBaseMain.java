@@ -40,9 +40,10 @@ public class TpchBaseMain {
     if (MvRewriteType.SPJG.equals(rewriteType)) {
       RelOptRules.MATERIALIZATION_RULES.forEach(planner::addRule);
     }
+    int i = 0;
     for (String mvSql : mvSqls) {
       RelOptMaterialization materialization = MaterializeUtils
-          .createMaterialization("mv", mvSql, rel.getCluster(), true);
+          .createMaterialization("mv" + ++i, mvSql, rel.getCluster(), true);
       planner.addMaterialization(materialization);
     }
 
@@ -56,7 +57,7 @@ public class TpchBaseMain {
     System.out.println("### " + banner + " ###");
     System.out.println("### Before:");
     System.out.print(result.getBefore().explain());
-    boolean success = result.getAfter().explain().contains("table=[[mv]]");
+    boolean success = result.getAfter().explain().contains("table=[[mv");
     if (success) {
       System.out.println("### After:");
       System.out.println(SqlUtils.toSqlString(result.getAfter()));
