@@ -39,6 +39,14 @@ public class TpchAggOnAggMain extends TpchBaseMain {
     printInfo("Query 26, aggregate on aggregate, case 3 mv-second agg, "
         + SPJG.name(), result);
 
+    // Case 4. Materialize first and second agg
+    routine(SPJG, sql, FileUtils.getFileContent("tpch/mvs/26-1.sql"),
+        FileUtils.getFileContent("tpch/mvs/26-2.sql"));
+    printInfo(
+        "Query 26, aggregate on aggregate, case 4 mv-(first and second agg), "
+            + SPJG.name(),
+        result);
+
     /// Query 13, aggregate on aggregate
     // Case 1. Materialize whole query
     sql = FileUtils.getFileContent("tpch/queries/13.sql");
