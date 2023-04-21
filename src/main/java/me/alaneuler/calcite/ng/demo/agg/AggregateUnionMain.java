@@ -14,10 +14,10 @@ public class AggregateUnionMain extends CommonTableMain {
                goods,
                sum(price)
         FROM (
-          SELECT price, goods, user_id
+          SELECT user_id, goods, price
           FROM pt_order WHERE id < 100
           UNION ALL
-          SELECT price, goods, user_id
+          SELECT user_id, goods, price
           FROM pt_order WHERE id > 1000
         )
         GROUP BY user_id, goods
