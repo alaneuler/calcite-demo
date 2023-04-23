@@ -12,7 +12,7 @@ public class AggregateUnionMain extends CommonTableMain {
     String sql = """
         SELECT user_id,
                goods,
-               sum(price)
+               count(price)
         FROM (
           SELECT user_id, goods, price
           FROM pt_order WHERE id < 100
