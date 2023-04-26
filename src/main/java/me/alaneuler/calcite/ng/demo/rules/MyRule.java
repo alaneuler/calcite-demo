@@ -6,9 +6,7 @@ import org.apache.calcite.rel.rules.TransformationRule;
 import org.immutables.value.Value;
 
 @Value.Enclosing
-public class MyRule extends RelRule<MyRule.Config>
-    implements
-      TransformationRule {
+public class MyRule extends RelRule<MyRule.Config> implements TransformationRule {
   protected MyRule(Config config) {
     super(config);
   }

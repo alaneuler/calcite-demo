@@ -33,8 +33,8 @@ public class SPJGMain extends CommonTableMain {
     RelNode rel = RelUtils.sqlToRel(sql);
     RelUtils.dump(rel);
 
-    RelOptMaterialization materialization = MaterializeUtils
-        .createMaterialization("mv", mvSql, rel.getCluster(), false);
+    RelOptMaterialization materialization = MaterializeUtils.createMaterialization("mv", mvSql,
+        rel.getCluster(), false);
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     planner.setTopDownOpt(true);
     planner.setNoneConventionHasInfiniteCost(false);

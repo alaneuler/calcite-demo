@@ -17,24 +17,21 @@ public class TpchDenormalizedTableMain extends TpchBaseMain {
     // Case 1. Materialize whole query
     sql = FileUtils.getFileContent("tpch/queries/5.sql");
     result = routine(SUBSTITUTION, sql, sql);
-    printInfo("Query 5, inner join, case 1 mv-whole, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 5, inner join, case 1 mv-whole, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, sql);
     printInfo("Query 5, inner join, case 1 mv-whole, " + SPJG.name(), result);
 
     // Case 2. Materialize part of query: SPJG
     mvSql = FileUtils.getFileContent("tpch/mvs/5-1.sql");
     result = routine(SUBSTITUTION, sql, mvSql);
-    printInfo("Query 5, inner join, case 2 mv-SPJG, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 5, inner join, case 2 mv-SPJG, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, mvSql);
     printInfo("Query 5, inner join, case 2 mv-SPJG, " + SPJG.name(), result);
 
     // Case 3. Materialize part of query: SPJ
     mvSql = FileUtils.getFileContent("tpch/mvs/5-2.sql");
     result = routine(SUBSTITUTION, sql, mvSql);
-    printInfo("Query 5, inner join, case 3 mv-SPJ, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 5, inner join, case 3 mv-SPJ, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, mvSql);
     printInfo("Query 5, inner join, case 3 mv-SPJ, " + SPJG.name(), result);
 
@@ -42,24 +39,21 @@ public class TpchDenormalizedTableMain extends TpchBaseMain {
     // Case 1. Materialize whole query
     sql = FileUtils.getFileContent("tpch/queries/25.sql");
     result = routine(SUBSTITUTION, sql, sql);
-    printInfo("Query 25, left join, case 1 mv-whole, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 25, left join, case 1 mv-whole, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, sql);
     printInfo("Query 25, left join, case 1 mv-whole, " + SPJG.name(), result);
 
     // Case 2. Materialize SPJG
     mvSql = FileUtils.getFileContent("tpch/mvs/25-1.sql");
     result = routine(SUBSTITUTION, sql, mvSql);
-    printInfo("Query 25, left join, case 2 mv-SPJG, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 25, left join, case 2 mv-SPJG, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, mvSql);
     printInfo("Query 25, left join, case 2 mv-SPJG, " + SPJG.name(), result);
 
     // Case 3. Materialize SPJ
     mvSql = FileUtils.getFileContent("tpch/mvs/25-2.sql");
     result = routine(SUBSTITUTION, sql, mvSql);
-    printInfo("Query 25, left join, case 3 mv-SPJ, " + SUBSTITUTION.name(),
-        result);
+    printInfo("Query 25, left join, case 3 mv-SPJ, " + SUBSTITUTION.name(), result);
     result = routine(SPJG, sql, mvSql);
     printInfo("Query 25, left join, case 3 mv-SPJ, " + SPJG.name(), result);
   }

@@ -25,8 +25,7 @@ public class CollectionMain extends CommonTableMain {
 
   private static RelOptPlanner hepPlanner() {
     HepProgramBuilder builder = new HepProgramBuilder();
-    builder.addRuleCollection(
-        List.of(CoreRules.FILTER_INTO_JOIN, CoreRules.AGGREGATE_MERGE));
+    builder.addRuleCollection(List.of(CoreRules.FILTER_INTO_JOIN, CoreRules.AGGREGATE_MERGE));
     return new HepPlanner(builder.build());
   }
 }

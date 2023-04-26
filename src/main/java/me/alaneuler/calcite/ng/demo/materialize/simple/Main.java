@@ -25,8 +25,8 @@ public class Main extends MaterializeBaseMain {
         """;
 
     RelNode relNode = RelUtils.sqlToRel(sql);
-    RelOptMaterialization materialization = MaterializeUtils
-        .createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
+    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName,
+        mvSql, relNode.getCluster(), false);
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();

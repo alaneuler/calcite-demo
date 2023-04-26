@@ -21,12 +21,11 @@ public class TpchBaseMain {
     SPJG, SUBSTITUTION,
   }
 
-  protected static RoutineResult routine(MvRewriteType rewriteType,
-      String query, String... mvSqls) {
+  protected static RoutineResult routine(MvRewriteType rewriteType, String query,
+      String... mvSqls) {
     RelNode rel;
     if (rewriteType.equals(MvRewriteType.SPJG)) {
-      rel = RelUtils.sqlToRel(query,
-          Map.of("materializationsEnabled", "false"));
+      rel = RelUtils.sqlToRel(query, Map.of("materializationsEnabled", "false"));
     } else {
       rel = RelUtils.sqlToRel(query);
       // No need to convert to Calc, since the SUBSTITUTION will do this for us.
@@ -42,8 +41,8 @@ public class TpchBaseMain {
     }
     int i = 0;
     for (String mvSql : mvSqls) {
-      RelOptMaterialization materialization = MaterializeUtils
-          .createMaterialization("mv" + ++i, mvSql, rel.getCluster(), true);
+      RelOptMaterialization materialization = MaterializeUtils.createMaterialization("mv" + ++i,
+          mvSql, rel.getCluster(), true);
       planner.addMaterialization(materialization);
     }
 
@@ -64,8 +63,7 @@ public class TpchBaseMain {
       System.out.print(result.getAfter().explain());
     }
 
-    System.out.println(
-        result.getType() + " rewrite " + (success ? "succeed" : "failed"));
+    System.out.println(result.getType() + " rewrite " + (success ? "succeed" : "failed"));
     System.out.println();
   }
 

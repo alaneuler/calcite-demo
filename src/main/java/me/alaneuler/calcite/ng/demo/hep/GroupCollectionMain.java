@@ -31,8 +31,7 @@ public class GroupCollectionMain extends CommonTableMain {
     builder.addRuleInstance(CoreRules.FILTER_INTO_JOIN);
     builder.addRuleInstance(CoreRules.AGGREGATE_MERGE);
     builder.addRuleCollection(List.of(CoreRules.AGGREGATE_UNION_TRANSPOSE,
-        CoreRules.JOIN_LEFT_UNION_TRANSPOSE,
-        CoreRules.JOIN_RIGHT_UNION_TRANSPOSE));
+        CoreRules.JOIN_LEFT_UNION_TRANSPOSE, CoreRules.JOIN_RIGHT_UNION_TRANSPOSE));
     builder.addGroupEnd();
     return new HepPlanner(builder.build());
   }

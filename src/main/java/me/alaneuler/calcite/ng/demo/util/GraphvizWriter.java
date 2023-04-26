@@ -31,8 +31,7 @@ public class GraphvizWriter implements RelWriter {
   }
 
   @Override
-  public void explain(RelNode rel,
-      List<Pair<String, @Nullable Object>> valueList) {
+  public void explain(RelNode rel, List<Pair<String, @Nullable Object>> valueList) {
     throw new UnsupportedOperationException();
   }
 
@@ -79,8 +78,7 @@ public class GraphvizWriter implements RelWriter {
       sb.append(entry.getKey());
       sb.append('=');
       sb.append(entry.getValue());
-      lineCharCount += entry.getKey().length()
-          + entry.getValue().toString().length();
+      lineCharCount += entry.getKey().length() + entry.getValue().toString().length();
     }
     sb.append(')');
 

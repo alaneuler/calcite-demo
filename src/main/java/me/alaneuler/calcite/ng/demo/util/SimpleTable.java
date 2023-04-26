@@ -28,8 +28,7 @@ public class SimpleTable extends AbstractTable implements ScannableTable {
 
       for (int i = 0; i < fieldNames.size(); i++) {
         RelDataType fieldType = typeFactory.createSqlType(fieldTypes.get(i));
-        RelDataTypeField field = new RelDataTypeFieldImpl(fieldNames.get(i), i,
-            fieldType);
+        RelDataTypeField field = new RelDataTypeFieldImpl(fieldNames.get(i), i, fieldType);
         fields.add(field);
       }
 

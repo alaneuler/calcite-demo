@@ -11,15 +11,11 @@ public class CommonTableMain {
   }
 
   private static void createCommonTable() {
-    TableUtils.createTable("", "pt_user",
-        List.of(Pair.of("id", SqlTypeName.INTEGER),
-            Pair.of("name", SqlTypeName.VARCHAR),
-            Pair.of("age", SqlTypeName.INTEGER)));
+    TableUtils.createTable("", "pt_user", List.of(Pair.of("id", SqlTypeName.INTEGER),
+        Pair.of("name", SqlTypeName.VARCHAR), Pair.of("age", SqlTypeName.INTEGER)));
 
     TableUtils.createTable("", "pt_order",
-        List.of(Pair.of("id", SqlTypeName.INTEGER),
-            Pair.of("user_id", SqlTypeName.INTEGER),
-            Pair.of("goods", SqlTypeName.VARCHAR),
-            Pair.of("price", SqlTypeName.DECIMAL)));
+        List.of(Pair.of("id", SqlTypeName.INTEGER), Pair.of("user_id", SqlTypeName.INTEGER),
+            Pair.of("goods", SqlTypeName.VARCHAR), Pair.of("price", SqlTypeName.DECIMAL)));
   }
 }

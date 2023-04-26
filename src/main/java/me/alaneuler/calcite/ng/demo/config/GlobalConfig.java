@@ -36,11 +36,9 @@ public class GlobalConfig {
     this.px = prepareContext();
     this.sqlParserConfig = parserConfig();
 
-    this.frameworkConfig = Frameworks.newConfigBuilder()
-        .parserConfig(this.sqlParserConfig)
-        .defaultSchema(this.px.getMutableRootSchema().plus())
-        .context(new ConfigContext(Map.of())).operatorTable(operatorTable())
-        .build();
+    this.frameworkConfig = Frameworks.newConfigBuilder().parserConfig(this.sqlParserConfig)
+        .defaultSchema(this.px.getMutableRootSchema().plus()).context(new ConfigContext(Map.of()))
+        .operatorTable(operatorTable()).build();
   }
 
   /**
@@ -59,13 +57,12 @@ public class GlobalConfig {
   private SqlParser.Config parserConfig() {
     return SqlParser.config().withConformance(SqlConformanceEnum.MYSQL_5)
         .withQuoting(Quoting.BACK_TICK).withCaseSensitive(false)
-        .withParserFactory(new SimpleSqlParserImplFactory())
-        .withUnquotedCasing(Casing.UNCHANGED);
+        .withParserFactory(new SimpleSqlParserImplFactory()).withUnquotedCasing(Casing.UNCHANGED);
   }
 
   public static SqlOperatorTable operatorTable() {
     return SqlOperatorTables.chain(SqlStdOperatorTable.instance(),
-        SqlLibraryOperatorTableFactory.INSTANCE.getOperatorTable(Set
-            .of(SqlLibrary.MYSQL, SqlLibrary.POSTGRESQL, SqlLibrary.ORACLE)));
+        SqlLibraryOperatorTableFactory.INSTANCE
+            .getOperatorTable(Set.of(SqlLibrary.MYSQL, SqlLibrary.POSTGRESQL, SqlLibrary.ORACLE)));
   }
 }

@@ -18,8 +18,7 @@ public class FileUtils {
   public static List<String> getFilesContents(String dir) {
     return listFiles(dir).stream().map(file -> {
       try {
-        return org.apache.commons.io.FileUtils.readFileToString(file,
-            StandardCharsets.UTF_8);
+        return org.apache.commons.io.FileUtils.readFileToString(file, StandardCharsets.UTF_8);
       } catch (Throwable e) {
         return "";
       }
@@ -28,8 +27,7 @@ public class FileUtils {
 
   public static File getFile(String path) {
     try {
-      return new File(
-          FileUtils.class.getClassLoader().getResource(path).toURI());
+      return new File(FileUtils.class.getClassLoader().getResource(path).toURI());
     } catch (Throwable e) {
       throw new RuntimeException(e);
     }

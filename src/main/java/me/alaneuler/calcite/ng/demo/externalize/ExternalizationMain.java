@@ -27,10 +27,9 @@ public class ExternalizationMain extends CommonTableMain {
     CalciteCatalogReader catalogReader = new CalciteCatalogReader(
         GlobalConfig.INSTANCE.getPx().getRootSchema(),
         GlobalConfig.INSTANCE.getPx().getDefaultSchemaPath(),
-        GlobalConfig.INSTANCE.getPx().getTypeFactory(),
-        GlobalConfig.INSTANCE.getPx().config());
-    RelJsonReader reader = new RelJsonReader(relNode.getCluster(),
-        catalogReader, GlobalConfig.INSTANCE.getPx().getRootSchema().plus());
+        GlobalConfig.INSTANCE.getPx().getTypeFactory(), GlobalConfig.INSTANCE.getPx().config());
+    RelJsonReader reader = new RelJsonReader(relNode.getCluster(), catalogReader,
+        GlobalConfig.INSTANCE.getPx().getRootSchema().plus());
     RelNode nNode = reader.read(jsonStr);
     RelJsonWriter writer2 = new RelJsonWriter();
     nNode.explain(writer2);

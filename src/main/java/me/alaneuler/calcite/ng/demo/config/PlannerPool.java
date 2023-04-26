@@ -15,10 +15,8 @@ public class PlannerPool {
   public static Planner getPlanner(Map<String, String> configs) {
     FrameworkConfig frameworkConfig = Frameworks.newConfigBuilder()
         .parserConfig(GlobalConfig.INSTANCE.getSqlParserConfig())
-        .defaultSchema(
-            GlobalConfig.INSTANCE.getPx().getMutableRootSchema().plus())
-        .context(new ConfigContext(configs))
-        .operatorTable(GlobalConfig.operatorTable()).build();
+        .defaultSchema(GlobalConfig.INSTANCE.getPx().getMutableRootSchema().plus())
+        .context(new ConfigContext(configs)).operatorTable(GlobalConfig.operatorTable()).build();
     return Frameworks.getPlanner(frameworkConfig);
   }
 }

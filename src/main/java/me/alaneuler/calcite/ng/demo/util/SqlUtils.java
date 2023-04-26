@@ -14,8 +14,7 @@ public class SqlUtils {
    */
   public static String toSqlString(RelNode root, SqlDialect dialect) {
     RelToSqlConverter converter = new RelToSqlConverter(dialect);
-    return converter.visitRoot(root).asStatement().toSqlString(dialect)
-        .getSql();
+    return converter.visitRoot(root).asStatement().toSqlString(dialect).getSql();
   }
 
   /**
