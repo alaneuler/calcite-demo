@@ -1,13 +1,12 @@
 package me.alaneuler.calcite.ng.demo.config;
 
+import java.io.Reader;
 import org.apache.calcite.server.DdlExecutor;
 import org.apache.calcite.server.ServerDdlExecutor;
 import org.apache.calcite.sql.parser.SqlAbstractParserImpl;
 import org.apache.calcite.sql.parser.SqlParserImplFactory;
 import org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl;
 import org.apache.calcite.util.SourceStringReader;
-
-import java.io.Reader;
 
 public class SimpleSqlParserImplFactory implements SqlParserImplFactory {
   @Override

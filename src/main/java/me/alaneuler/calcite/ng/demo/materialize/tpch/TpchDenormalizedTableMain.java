@@ -1,13 +1,11 @@
 package me.alaneuler.calcite.ng.demo.materialize.tpch;
 
-import me.alaneuler.calcite.ng.demo.util.FileUtils;
-
 import static me.alaneuler.calcite.ng.demo.materialize.tpch.TpchBaseMain.MvRewriteType.SPJG;
 import static me.alaneuler.calcite.ng.demo.materialize.tpch.TpchBaseMain.MvRewriteType.SUBSTITUTION;
 
-/**
- * 大宽表场景
- */
+import me.alaneuler.calcite.ng.demo.util.FileUtils;
+
+/** 大宽表场景 */
 public class TpchDenormalizedTableMain extends TpchBaseMain {
   public static void main(String[] args) {
     String sql, mvSql;

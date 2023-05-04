@@ -1,10 +1,9 @@
 package me.alaneuler.calcite.ng.demo.util;
 
-import org.apache.calcite.plan.volcano.VolcanoPlanner;
-import org.apache.calcite.rel.RelNode;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import org.apache.calcite.plan.volcano.VolcanoPlanner;
+import org.apache.calcite.rel.RelNode;
 
 public class VolcanoUtils {
   public static void dump(VolcanoPlanner planner) {

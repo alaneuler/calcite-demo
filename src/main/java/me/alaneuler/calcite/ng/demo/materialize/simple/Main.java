@@ -11,22 +11,24 @@ import org.apache.calcite.rel.RelNode;
 public class Main extends MaterializeBaseMain {
 
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT col1, COUNT(*)
         FROM tbl
         WHERE ts > '2023-01-01 00:00:00' AND ts < '2023-01-10 23:59:59'
         GROUP BY col1
         """;
     String mvTableName = "tbl_mv";
-    String mvSql = """
+    String mvSql =
+        """
         SELECT col1, TO_DATE(ts, 'YYYY-MM-DD') AS dt, COUNT(*) AS cnt
         FROM tbl
         GROUP BY col1, dt
         """;
 
     RelNode relNode = RelUtils.sqlToRel(sql);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName,
-        mvSql, relNode.getCluster(), false);
+    RelOptMaterialization materialization =
+        MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
     HepPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();

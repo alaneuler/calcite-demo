@@ -7,12 +7,11 @@ import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.rules.CoreRules;
 
-/**
- * Reduce complex calculator in Aggregate using simple calculator.
- */
+/** Reduce complex calculator in Aggregate using simple calculator. */
 public class AggregateReduceMain extends CommonTableMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT name, stddev(age), avg(age) from pt_user group by name
         """;
     RelNode relNode = RelUtils.sqlToRel(sql);

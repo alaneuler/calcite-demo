@@ -12,9 +12,7 @@ public class MyRule extends RelRule<MyRule.Config> implements TransformationRule
   }
 
   @Override
-  public void onMatch(RelOptRuleCall call) {
-
-  }
+  public void onMatch(RelOptRuleCall call) {}
 
   @Value.Immutable
   public interface Config extends RelRule.Config {

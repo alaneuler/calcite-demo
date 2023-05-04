@@ -9,7 +9,8 @@ import org.apache.calcite.rel.rules.CoreRules;
 
 public class AggregateUnionMain extends CommonTableMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT user_id,
                goods,
                count(price)

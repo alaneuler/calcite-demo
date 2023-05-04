@@ -1,5 +1,7 @@
 package me.alaneuler.calcite.ng.demo.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.calcite.DataContext;
 import org.apache.calcite.linq4j.Enumerable;
 import org.apache.calcite.rel.type.RelDataType;
@@ -11,9 +13,6 @@ import org.apache.calcite.rel.type.StructKind;
 import org.apache.calcite.schema.ScannableTable;
 import org.apache.calcite.schema.impl.AbstractTable;
 import org.apache.calcite.sql.type.SqlTypeName;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SimpleTable extends AbstractTable implements ScannableTable {
   private List<String> fieldNames = new ArrayList<>();

@@ -1,5 +1,6 @@
 package me.alaneuler.calcite.ng.demo.materialize.tpch;
 
+import java.util.Map;
 import me.alaneuler.calcite.ng.demo.util.FileUtils;
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
@@ -14,15 +15,14 @@ import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.rules.CoreRules;
 
-import java.util.Map;
-
 public class TpchBaseMain {
   enum MvRewriteType {
-    SPJG, SUBSTITUTION,
+    SPJG,
+    SUBSTITUTION,
   }
 
-  protected static RoutineResult routine(MvRewriteType rewriteType, String query,
-      String... mvSqls) {
+  protected static RoutineResult routine(
+      MvRewriteType rewriteType, String query, String... mvSqls) {
     RelNode rel;
     if (rewriteType.equals(MvRewriteType.SPJG)) {
       rel = RelUtils.sqlToRel(query, Map.of("materializationsEnabled", "false"));
@@ -41,8 +41,8 @@ public class TpchBaseMain {
     }
     int i = 0;
     for (String mvSql : mvSqls) {
-      RelOptMaterialization materialization = MaterializeUtils.createMaterialization("mv" + ++i,
-          mvSql, rel.getCluster(), true);
+      RelOptMaterialization materialization =
+          MaterializeUtils.createMaterialization("mv" + ++i, mvSql, rel.getCluster(), true);
       planner.addMaterialization(materialization);
     }
 

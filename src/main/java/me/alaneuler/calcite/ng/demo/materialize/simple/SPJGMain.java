@@ -13,7 +13,8 @@ import org.apache.calcite.rel.RelNode;
 public class SPJGMain extends CommonTableMain {
   public static void main(String[] args) {
     createTables();
-    String sql = """
+    String sql =
+        """
         select name, sum(price)
         from (
           select name, price
@@ -23,7 +24,8 @@ public class SPJGMain extends CommonTableMain {
         )
         group by name
         """;
-    String mvSql = """
+    String mvSql =
+        """
         select name, price
         from orders, customers
         where orders.customer_id = customers.id
@@ -33,8 +35,8 @@ public class SPJGMain extends CommonTableMain {
     RelNode rel = RelUtils.sqlToRel(sql);
     RelUtils.dump(rel);
 
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization("mv", mvSql,
-        rel.getCluster(), false);
+    RelOptMaterialization materialization =
+        MaterializeUtils.createMaterialization("mv", mvSql, rel.getCluster(), false);
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     planner.setTopDownOpt(true);
     planner.setNoneConventionHasInfiniteCost(false);
@@ -47,7 +49,8 @@ public class SPJGMain extends CommonTableMain {
   }
 
   private static void createTables() {
-    TableUtils.createTable("""
+    TableUtils.createTable(
+        """
         CREATE TABLE orders (
           id INTEGER,
           product VARCHAR,
@@ -55,14 +58,16 @@ public class SPJGMain extends CommonTableMain {
           customer_id INTEGER
         )
         """);
-    TableUtils.createTable("""
+    TableUtils.createTable(
+        """
         CREATE TABLE customers (
           id INTEGER,
           name VARCHAR
         )
         """);
 
-    TableUtils.createTable("""
+    TableUtils.createTable(
+        """
         CREATE TABLE mv (
           name VARCHAR,
           price DOUBLE

@@ -9,7 +9,8 @@ import org.apache.calcite.rel.RelNode;
 
 public class AggRemoveMain {
   public static void main(String[] args) throws Exception {
-    String sql = """
+    String sql =
+        """
         SELECT name, sum(count_inner)
         FROM
           (SELECT name, COUNT(*) AS count_inner

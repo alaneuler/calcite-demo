@@ -1,5 +1,6 @@
 package me.alaneuler.calcite.ng.demo.hep;
 
+import java.util.List;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.plan.RelOptPlanner;
@@ -7,8 +8,6 @@ import org.apache.calcite.plan.hep.HepPlanner;
 import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.rules.CoreRules;
-
-import java.util.List;
 
 public class CollectionMain extends CommonTableMain {
   public static void main(String[] args) throws Exception {

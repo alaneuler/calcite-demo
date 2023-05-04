@@ -9,7 +9,8 @@ import org.apache.calcite.rel.RelNode;
 
 public class AggregateDistinctMain extends TpchBaseMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT p_brand,
                p_type,
                p_size,
@@ -29,7 +30,8 @@ public class AggregateDistinctMain extends TpchBaseMain {
                  p_size
         """;
     String mvTableName = "tbl_mv";
-    String mvSql = """
+    String mvSql =
+        """
         SELECT DISTINCT
                p_brand,
                p_type,
@@ -41,8 +43,8 @@ public class AggregateDistinctMain extends TpchBaseMain {
         """;
 
     RelNode relNode = RelUtils.sqlToRel(sql);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName,
-        mvSql, relNode.getCluster(), true);
+    RelOptMaterialization materialization =
+        MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster(), true);
 
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(relNode);
     planner.setTopDownOpt(true);

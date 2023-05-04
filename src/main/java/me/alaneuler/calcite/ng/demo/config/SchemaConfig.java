@@ -34,7 +34,10 @@ public class SchemaConfig {
   }
 
   public static DdlExecutor ddlExecutor() {
-    return GlobalConfig.INSTANCE.getFrameworkConfig().getParserConfig().parserFactory()
+    return GlobalConfig.INSTANCE
+        .getFrameworkConfig()
+        .getParserConfig()
+        .parserFactory()
         .getDdlExecutor();
   }
 }

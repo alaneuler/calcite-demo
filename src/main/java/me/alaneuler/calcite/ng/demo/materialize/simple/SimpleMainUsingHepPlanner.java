@@ -11,7 +11,8 @@ import org.apache.calcite.rel.rules.materialize.MaterializedViewRules;
 
 public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT col1, SUM(cnt) FROM (
           SELECT col1, TO_DATE(ts, 'YYYY-MM-DD') AS dt, COUNT(*) AS cnt
           FROM tbl
@@ -19,7 +20,8 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
         ) GROUP BY col1
         """;
     String mvTableName = "tbl_mv";
-    String mvSql = """
+    String mvSql =
+        """
         SELECT col1, TO_DATE(ts, 'YYYY-MM-DD') AS dt, COUNT(*) AS cnt
         FROM tbl
         GROUP BY col1, dt
@@ -27,8 +29,8 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
 
     RelNode relNode = RelUtils.sqlToRel(sql);
     RelUtils.dump(relNode);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName,
-        mvSql, relNode.getCluster(), false);
+    RelOptMaterialization materialization =
+        MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
     HepPlanner planner = hepPlanner();
     RelOptRules.MATERIALIZATION_RULES.forEach(planner::addRule);
     planner.addMaterialization(materialization);

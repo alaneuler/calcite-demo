@@ -16,13 +16,17 @@ public class FileUtils {
   }
 
   public static List<String> getFilesContents(String dir) {
-    return listFiles(dir).stream().map(file -> {
-      try {
-        return org.apache.commons.io.FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-      } catch (Throwable e) {
-        return "";
-      }
-    }).collect(Collectors.toList());
+    return listFiles(dir).stream()
+        .map(
+            file -> {
+              try {
+                return org.apache.commons.io.FileUtils.readFileToString(
+                    file, StandardCharsets.UTF_8);
+              } catch (Throwable e) {
+                return "";
+              }
+            })
+        .collect(Collectors.toList());
   }
 
   public static File getFile(String path) {

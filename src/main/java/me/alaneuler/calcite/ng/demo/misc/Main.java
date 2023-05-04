@@ -14,7 +14,8 @@ public class Main extends CommonTableMain {
     // String sql = "select /*+ INDEX(myDate) */ * from table1 where myDate >=
     // '2022-09-25'";
     // String sql = "select * from pt_user";
-    String sql = """
+    String sql =
+        """
         SELECT pt_user.id, name, age, sum(price)
         FROM pt_user join pt_order ON pt_user.id = pt_order.user_id
         WHERE age >= 20 AND age <= 30

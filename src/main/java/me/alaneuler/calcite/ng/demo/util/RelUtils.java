@@ -1,14 +1,13 @@
 package me.alaneuler.calcite.ng.demo.util;
 
+import java.lang.reflect.Field;
+import java.util.Map;
 import me.alaneuler.calcite.ng.demo.config.PlannerPool;
 import org.apache.calcite.plan.RelOptCluster;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.logical.LogicalTableScan;
 import org.apache.calcite.sql.SqlNode;
 import org.apache.calcite.tools.Planner;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 public class RelUtils {
   public static LogicalTableScan createTableScan(String tableName) {
@@ -21,15 +20,20 @@ public class RelUtils {
   }
 
   public static String toGraphvizString(RelNode root) {
-    StringBuilder sb = new StringBuilder(
-        String.format("digraph %s {\n  \"rankdir\"=\"BT\";\n", root.getClass().getSimpleName()));
+    StringBuilder sb =
+        new StringBuilder(
+            String.format(
+                "digraph %s {\n  \"rankdir\"=\"BT\";\n", root.getClass().getSimpleName()));
     dump(root, sb);
     return sb.append("}").toString();
   }
 
   private static void dump(RelNode node, StringBuilder sb) {
     for (RelNode child : node.getInputs()) {
-      sb.append("  \"").append(graphDigest(child)).append("\" -> \"").append(graphDigest(node))
+      sb.append("  \"")
+          .append(graphDigest(child))
+          .append("\" -> \"")
+          .append(graphDigest(node))
           .append("\";\n");
       dump(child, sb);
     }

@@ -10,7 +10,8 @@ import org.apache.calcite.rel.RelNode;
 
 public class SimpleMainUsingVolcano extends MaterializeBaseMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT col1, SUM(cnt) FROM (
           SELECT col1, TO_DATE(ts, 'YYYY-MM-DD') AS dt, COUNT(*) AS cnt
           FROM tbl
@@ -18,7 +19,8 @@ public class SimpleMainUsingVolcano extends MaterializeBaseMain {
         ) GROUP BY col1
         """;
     String mvTableName = "tbl_mv";
-    String mvSql = """
+    String mvSql =
+        """
         SELECT col1, TO_DATE(ts, 'YYYY-MM-DD') AS dt, COUNT(*) AS cnt
         FROM tbl
         GROUP BY col1, dt
@@ -26,8 +28,8 @@ public class SimpleMainUsingVolcano extends MaterializeBaseMain {
 
     RelNode relNode = RelUtils.sqlToRel(sql);
     RelUtils.dump(relNode);
-    RelOptMaterialization materialization = MaterializeUtils.createMaterialization(mvTableName,
-        mvSql, relNode.getCluster(), false);
+    RelOptMaterialization materialization =
+        MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(relNode);
     planner.setTopDownOpt(true);
     planner.setNoneConventionHasInfiniteCost(false);
