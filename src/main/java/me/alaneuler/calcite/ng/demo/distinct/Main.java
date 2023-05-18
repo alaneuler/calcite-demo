@@ -1,6 +1,5 @@
 package me.alaneuler.calcite.ng.demo.distinct;
 
-import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import me.alaneuler.calcite.ng.demo.util.SqlUtils;
 import org.apache.calcite.plan.hep.HepPlanner;
@@ -8,18 +7,22 @@ import org.apache.calcite.plan.hep.HepProgramBuilder;
 import org.apache.calcite.rel.RelNode;
 import org.apache.calcite.rel.rules.CoreRules;
 
-public class Main extends CommonTableMain {
+public class Main extends DistinctTableMain {
   public static void main(String[] args) {
     String sql =
         """
         SELECT
           age,
-          COUNT(DISTINCT id) AS cnti,
-          COUNT(DISTINCT name) AS cntn
+          country,
+          COUNT(DISTINCT first_name),
+          COUNT(DISTINCT last_name),
+          COUNT(DISTINCT state),
+          AVG(signupDate),
+          SUM(id)
         FROM
           pt_user
         GROUP BY
-          age, address
+          age, country
         """;
 
     RelNode rel = RelUtils.sqlToRel(sql);

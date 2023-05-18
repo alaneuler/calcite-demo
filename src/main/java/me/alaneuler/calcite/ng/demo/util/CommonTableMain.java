@@ -16,8 +16,7 @@ public class CommonTableMain {
         List.of(
             Pair.of("id", SqlTypeName.INTEGER),
             Pair.of("name", SqlTypeName.VARCHAR),
-            Pair.of("age", SqlTypeName.INTEGER),
-            Pair.of("address", SqlTypeName.VARCHAR)));
+            Pair.of("age", SqlTypeName.INTEGER)));
 
     TableUtils.createTable(
         "",

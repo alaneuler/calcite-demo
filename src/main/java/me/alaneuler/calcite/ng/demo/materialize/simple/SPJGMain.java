@@ -1,5 +1,6 @@
 package me.alaneuler.calcite.ng.demo.materialize.simple;
 
+import java.util.Map;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
@@ -29,10 +30,10 @@ public class SPJGMain extends CommonTableMain {
         select name, price
         from orders, customers
         where orders.customer_id = customers.id
-        and price > 10
+        and (price > 10 or price < 5)
         """;
 
-    RelNode rel = RelUtils.sqlToRel(sql);
+    RelNode rel = RelUtils.sqlToRel(sql, Map.of("materializationsEnabled", "false"));
     RelUtils.dump(rel);
 
     RelOptMaterialization materialization =
