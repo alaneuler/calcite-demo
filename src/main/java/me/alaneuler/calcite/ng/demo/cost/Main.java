@@ -9,7 +9,8 @@ import org.apache.calcite.rel.rules.CoreRules;
 
 public class Main extends CommonTableMain {
   public static void main(String[] args) {
-    String sql = """
+    String sql =
+        """
         SELECT
           name,
           AVG(age)
