@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.cost;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
@@ -23,7 +24,7 @@ public class Main extends CommonTableMain {
         """;
 
     RelNode relNode = RelUtils.sqlToRel(sql);
-    RelUtils.dump(relNode);
+    RelDisplayUtils.dump(relNode);
 
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(relNode);
     planner.setTopDownOpt(true);
@@ -32,6 +33,6 @@ public class Main extends CommonTableMain {
 
     planner.setRoot(relNode);
     RelNode after = planner.findBestExp();
-    RelUtils.dump(after);
+    RelDisplayUtils.dump(after);
   }
 }

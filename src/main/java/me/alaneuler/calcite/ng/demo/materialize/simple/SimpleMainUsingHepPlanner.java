@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.materialize.simple;
 
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.plan.RelOptMaterialization;
 import org.apache.calcite.plan.RelOptRules;
@@ -28,7 +29,7 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
         """;
 
     RelNode relNode = RelUtils.sqlToRel(sql);
-    RelUtils.dump(relNode);
+    RelDisplayUtils.dump(relNode);
     RelOptMaterialization materialization =
         MaterializeUtils.createMaterialization(mvTableName, mvSql, relNode.getCluster(), false);
     HepPlanner planner = hepPlanner();
@@ -37,7 +38,7 @@ public class SimpleMainUsingHepPlanner extends MaterializeBaseMain {
 
     planner.setRoot(relNode);
     RelNode after = planner.findBestExp();
-    RelUtils.dump(after);
+    RelDisplayUtils.dump(after);
   }
 
   private static HepPlanner hepPlanner() {

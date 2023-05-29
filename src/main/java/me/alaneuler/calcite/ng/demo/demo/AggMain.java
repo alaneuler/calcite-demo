@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.demo;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.rel.RelNode;
 
@@ -22,6 +23,6 @@ public class AggMain extends CommonTableMain {
           user_id
             """;
     RelNode rel = RelUtils.sqlToRel(sql);
-    RelUtils.dump(rel);
+    RelDisplayUtils.dump(rel);
   }
 }

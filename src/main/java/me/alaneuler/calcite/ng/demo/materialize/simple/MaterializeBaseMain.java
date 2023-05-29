@@ -27,5 +27,33 @@ public class MaterializeBaseMain extends CommonTableMain {
             Pair.of("col1", SqlTypeName.VARCHAR),
             Pair.of("dt", SqlTypeName.DATE),
             Pair.of("cnt", SqlTypeName.INTEGER)));
+
+    TableUtils.createTable(
+        """
+        CREATE TABLE orders (
+          id INTEGER,
+          product_id INTEGER,
+          customer_id INTEGER,
+          dt DATE
+        )
+        """);
+
+    TableUtils.createTable(
+        """
+        CREATE TABLE customers (
+          id INTEGER,
+          name VARCHAR,
+          age INTEGER
+        )
+        """);
+
+    TableUtils.createTable(
+        """
+        CREATE TABLE products (
+          id INTEGER,
+          name VARCHAR,
+          price DOUBLE
+        )
+        """);
   }
 }

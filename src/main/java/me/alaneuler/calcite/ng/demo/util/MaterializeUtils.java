@@ -12,6 +12,11 @@ import org.apache.calcite.util.Pair;
 
 public class MaterializeUtils {
   public static RelOptMaterialization createMaterialization(
+      String mvTableName, String mvSql, RelOptCluster cluster) {
+    return createMaterialization(mvTableName, mvSql, cluster, true);
+  }
+
+  public static RelOptMaterialization createMaterialization(
       String mvTableName, String mvSql, RelOptCluster cluster, boolean createMvTable) {
     RelNode mvRel = RelUtils.sqlToRel(mvSql);
     RelUtils.setCluster(mvRel, cluster);

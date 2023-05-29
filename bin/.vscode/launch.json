@@ -1,0 +1,161 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "AggRemoveMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.agg.AggRemoveMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "AggregateReduceMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.agg.AggregateReduceMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "AggregateUnionMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.agg.AggregateUnionMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.cost.Main",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "AggMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.demo.AggMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "Main(1)",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.distinct.Main",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "ExternalizationMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.externalize.ExternalizationMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "CollectionMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.hep.CollectionMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "GroupCollectionMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.hep.GroupCollectionMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "GroupMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.hep.GroupMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "Main(2)",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.simple.Main",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "SPJGMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.simple.SPJGMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "SimpleMainUsingHepPlanner",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.simple.SimpleMainUsingHepPlanner",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "SimpleMainUsingVolcano",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.simple.SimpleMainUsingVolcano",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "AggregateDistinctMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.tpch.AggregateDistinctMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "TpchAggOnAggMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.tpch.TpchAggOnAggMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "TpchDenormalizedTableMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.materialize.tpch.TpchDenormalizedTableMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "InMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.misc.InMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "Main(3)",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.misc.Main",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "RollupMain",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.misc.RollupMain",
+            "projectName": "calcite-demo"
+        },
+        {
+            "type": "java",
+            "name": "Main(4)",
+            "request": "launch",
+            "mainClass": "me.alaneuler.calcite.ng.demo.volcano.Main",
+            "projectName": "calcite-demo"
+        }
+    ]
+}

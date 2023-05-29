@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.hep;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.plan.RelOptPlanner;
 import org.apache.calcite.plan.hep.HepPlanner;
@@ -18,7 +19,7 @@ public class GroupMain extends CommonTableMain {
     RelOptPlanner hepPlanner = hepPlanner();
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();
-    RelUtils.dump(relNode);
+    RelDisplayUtils.dump(relNode);
   }
 
   private static RelOptPlanner hepPlanner() {

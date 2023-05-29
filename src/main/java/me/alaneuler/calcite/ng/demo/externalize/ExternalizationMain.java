@@ -2,6 +2,7 @@ package me.alaneuler.calcite.ng.demo.externalize;
 
 import me.alaneuler.calcite.ng.demo.config.GlobalConfig;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.prepare.CalciteCatalogReader;
 import org.apache.calcite.rel.RelNode;
@@ -41,7 +42,7 @@ public class ExternalizationMain extends CommonTableMain {
     nNode.explain(writer2);
     String jsonStr2 = writer2.asString();
 
-    RelUtils.dump(relNode);
-    RelUtils.dump(nNode);
+    RelDisplayUtils.dump(relNode);
+    RelDisplayUtils.dump(nNode);
   }
 }

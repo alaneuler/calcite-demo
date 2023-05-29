@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.agg;
 
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import org.apache.calcite.plan.hep.HepPlanner;
 import org.apache.calcite.plan.hep.HepProgramBuilder;
@@ -30,7 +31,7 @@ public class AggregateUnionMain extends CommonTableMain {
     hepPlanner.setRoot(relNode);
     relNode = hepPlanner.findBestExp();
 
-    RelUtils.dump(relNode);
+    RelDisplayUtils.dump(relNode);
   }
 
   private static HepPlanner hepPlanner() {

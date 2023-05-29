@@ -1,6 +1,7 @@
 package me.alaneuler.calcite.ng.demo.materialize.tpch;
 
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
+import me.alaneuler.calcite.ng.demo.util.RelDisplayUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;
 import me.alaneuler.calcite.ng.demo.util.VolcanoUtils;
 import org.apache.calcite.plan.RelOptMaterialization;
@@ -53,6 +54,6 @@ public class AggregateDistinctMain extends TpchBaseMain {
 
     planner.setRoot(relNode);
     RelNode after = planner.findBestExp();
-    RelUtils.dump(after);
+    RelDisplayUtils.dump(after);
   }
 }
