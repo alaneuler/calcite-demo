@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.util;
+package me.alaneuler.calcite.ng.demo.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,20 @@ import org.apache.calcite.rel.type.RelDataTypeFieldImpl;
 import org.apache.calcite.rel.type.RelRecordType;
 import org.apache.calcite.rel.type.StructKind;
 import org.apache.calcite.schema.ScannableTable;
+import org.apache.calcite.schema.Statistic;
 import org.apache.calcite.schema.impl.AbstractTable;
 import org.apache.calcite.sql.type.SqlTypeName;
 
 public class SimpleTable extends AbstractTable implements ScannableTable {
+  private String tableName;
   private List<String> fieldNames = new ArrayList<>();
   private List<SqlTypeName> fieldTypes = new ArrayList<>();
 
   private RelDataType rowType;
+
+  public SimpleTable(String tableName) {
+    this.tableName = tableName;
+  }
 
   @Override
   public RelDataType getRowType(RelDataTypeFactory typeFactory) {
@@ -45,5 +51,18 @@ public class SimpleTable extends AbstractTable implements ScannableTable {
   @Override
   public Enumerable<Object[]> scan(DataContext root) {
     return null;
+  }
+
+  @Override
+  public Statistic getStatistic() {
+    return new Statistic() {
+      @Override
+      public Double getRowCount() {
+        if (tableName.toLowerCase().endsWith("mv")) {
+          return 10.0;
+        }
+        return 100.0;
+      }
+    };
   }
 }

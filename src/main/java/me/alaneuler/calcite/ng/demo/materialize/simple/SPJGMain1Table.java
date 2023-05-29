@@ -10,43 +10,22 @@ import org.apache.calcite.plan.RelOptRules;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 
-public class SPJGMain1TableMultiples extends MaterializeBaseMain {
+public class SPJGMain1Table extends MaterializeBaseMain {
   public static void main(String[] args) {
-    String sql =
-        """
-        SELECT
-          products.name,
-          products.price,
-          orders.dt
-        FROM orders, products
-        WHERE orders.product_id = products.id
-          AND dt > '2077.01.01'
-        UNION
-        SELECT
-          products.name,
-          products.price,
-          orders.dt
-        FROM orders, products
-        WHERE orders.product_id = products.id
-          AND dt < '2023.01.01'
+    String sql = """
+        SELECT * FROM products
+        WHERE price > 10
         """;
-
-    String mvSql =
-        """
-        SELECT
-          products.name,
-          products.price,
-          orders.dt
-        FROM orders, products
-        WHERE orders.product_id = products.id
-          AND dt > '2077.01.01'
+    String mvSql = """
+        SELECT * FROM products
+        WHERE price > 10
         """;
 
     RelNode rel = RelUtils.sqlToRel(sql, Map.of("materializationsEnabled", "false"));
     RelDisplayUtils.dump(rel);
 
     RelOptMaterialization materialization =
-        MaterializeUtils.createMaterialization("mv", mvSql, rel.getCluster(), true);
+        MaterializeUtils.createMaterialization("SPJGMain1TableMv", mvSql, rel.getCluster(), true);
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     planner.setTopDownOpt(true);
     planner.setNoneConventionHasInfiniteCost(false);
