@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize.simple;
+package me.alaneuler.calcite.ng.demo.materialize.spjg;
 
 import java.util.Map;
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
@@ -10,32 +10,30 @@ import org.apache.calcite.plan.RelOptRules;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 
-public class SPJGMain2Tables extends MaterializeBaseMain {
+public class QueryMoreThanViewNormal extends MaterializeBaseMain {
   public static void main(String[] args) {
-    String sql =
-        """
-        SELECT t1.name, SUM(t1.price)
-        FROM (
-          SELECT products.name, products.price, orders.dt
-          FROM orders, products
-          WHERE orders.product_id = products.id
-            AND (products.price > 10 OR products.price < 5)
-        ) AS t1
-        GROUP BY t1.name
-        """;
     String mvSql =
         """
-        SELECT products.name, products.price, orders.dt
-        FROM orders, products
-        WHERE orders.product_id = products.id
-          AND (products.price > 10 OR products.price < 5)
+        SELECT *
+        FROM orders
+        JOIN customers ON orders.customer_id = customers.id
+        """;
+
+    String sql =
+        """
+        SELECT *
+        FROM orders
+        JOIN products ON orders.product_id = products.id
+        JOIN customers ON orders.customer_id = customers.id
         """;
 
     RelNode rel = RelUtils.sqlToRel(sql, Map.of("materializationsEnabled", "false"));
     RelDisplayUtils.dump(rel);
 
     RelOptMaterialization materialization =
-        MaterializeUtils.createMaterialization("mv", mvSql, rel.getCluster(), true);
+        MaterializeUtils.createMaterialization(
+            "QueryMoreThanViewMv", mvSql, rel.getCluster(), true);
+
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     planner.setTopDownOpt(true);
     planner.setNoneConventionHasInfiniteCost(false);

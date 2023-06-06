@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize.simple;
+package me.alaneuler.calcite.ng.demo.materialize.spjg;
 
 import java.util.List;
 import me.alaneuler.calcite.ng.demo.util.CommonTableMain;
@@ -52,7 +52,8 @@ public class MaterializeBaseMain extends CommonTableMain {
         CREATE TABLE products (
           id INTEGER,
           name VARCHAR,
-          price DOUBLE
+          price DOUBLE,
+          weight DOUBLE
         )
         """);
   }

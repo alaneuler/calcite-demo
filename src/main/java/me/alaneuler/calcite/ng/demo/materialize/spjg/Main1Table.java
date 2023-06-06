@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize.simple;
+package me.alaneuler.calcite.ng.demo.materialize.spjg;
 
 import java.util.Map;
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
@@ -10,14 +10,14 @@ import org.apache.calcite.plan.RelOptRules;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 
-public class SPJGMain1Table extends MaterializeBaseMain {
+public class Main1Table extends MaterializeBaseMain {
   public static void main(String[] args) {
     String sql = """
-        SELECT * FROM products
+        SELECT id FROM products
         WHERE price > 10
         """;
     String mvSql = """
-        SELECT * FROM products
+        SELECT id, price FROM products
         WHERE price > 10
         """;
 

@@ -1,4 +1,4 @@
-package me.alaneuler.calcite.ng.demo.materialize.simple;
+package me.alaneuler.calcite.ng.demo.materialize.spjg;
 
 import me.alaneuler.calcite.ng.demo.util.MaterializeUtils;
 import me.alaneuler.calcite.ng.demo.util.RelUtils;

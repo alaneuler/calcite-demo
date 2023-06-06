@@ -23,6 +23,10 @@ public class RelDisplayUtils {
     }
 
     for (RelNode child : node.getInputs()) {
+      if (child instanceof RelSubset relSubset) {
+        child = relSubset.getBest();
+      }
+
       sb.append("  \"")
           .append(graphDigest(child))
           .append("\" -> \"")
