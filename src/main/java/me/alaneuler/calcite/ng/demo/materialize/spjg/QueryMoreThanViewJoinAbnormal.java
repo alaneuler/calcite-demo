@@ -10,21 +10,21 @@ import org.apache.calcite.plan.RelOptRules;
 import org.apache.calcite.plan.volcano.VolcanoPlanner;
 import org.apache.calcite.rel.RelNode;
 
-public class QueryMoreThanViewNormal extends MaterializeBaseMain {
+public class QueryMoreThanViewJoinAbnormal {
   public static void main(String[] args) {
     String mvSql =
         """
         SELECT *
-        FROM orders
-        JOIN customers ON orders.customer_id = customers.id
+        FROM orders, customers
+        WHERE orders.customer_id = customers.id
         """;
 
     String sql =
         """
         SELECT *
-        FROM orders
-        JOIN products ON orders.product_id = products.id
-        JOIN customers ON orders.customer_id = customers.id
+        FROM orders, products, customers
+        WHERE orders.product_id = products.id
+        AND orders.customer_id = customers.id
         """;
 
     RelNode rel = RelUtils.sqlToRel(sql, Map.of("materializationsEnabled", "false"));
@@ -32,7 +32,7 @@ public class QueryMoreThanViewNormal extends MaterializeBaseMain {
 
     RelOptMaterialization materialization =
         MaterializeUtils.createMaterialization(
-            "QueryMoreThanViewMv", mvSql, rel.getCluster(), true);
+            "QueryMoreThanViewJoinAbnormalMv", mvSql, rel.getCluster(), true);
 
     VolcanoPlanner planner = VolcanoUtils.extractVolcanoPlanner(rel);
     planner.setTopDownOpt(true);
